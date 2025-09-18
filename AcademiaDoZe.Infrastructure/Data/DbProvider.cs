@@ -6,6 +6,9 @@ using System.Data;
 using System.Data.Common;
 
 namespace AcademiaDoZe.Infrastructure.Data;
+
+
+
 public static class DbProvider
 {
     // Timeout padrão de 30 segundos para todos os comandos

@@ -11,12 +11,14 @@ namespace AcademiaDoZe.Presentation.AppMaui.Configuration
             const string dbServer = "localhost";
             const string dbDatabase = "db_academia_do_ze";
             const string dbUser = "root";
-            const string dbPassword = "4457";
+            const string dbPassword = "0811";
             //const string dbComplemento = "TrustServerCertificate=True;Encrypt=True;";
             // se for necessário indicar a porta, incluir junto em dbComplemento
 
             // Configurações de conexão
-            const string connectionString = $"Server={dbServer};Database={dbDatabase};User Id={dbUser};Password={dbPassword};";
+            const string connectionString =
+            "Server=mysql-academiaze;Port=3307;Database=db_academia_do_ze;Uid=root;Pwd=0811;";
+
 
             const EAppDatabaseType databaseType = EAppDatabaseType.MySql;
             // Configura a fábrica de repositórios com a string de conexão e tipo de banco

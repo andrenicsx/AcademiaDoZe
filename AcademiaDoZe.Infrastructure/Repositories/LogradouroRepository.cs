@@ -17,7 +17,7 @@ public class LogradouroRepository : BaseRepository<Logradouro>, ILogradouroRepos
             var logradouro = Logradouro.Criar(
             id: Convert.ToInt32(reader["id_logradouro"]),
             cep: reader["cep"].ToString()!,
-            nome: reader["nome"].ToString()!,
+            nome: reader["rua"].ToString()!,
             bairro: reader["bairro"].ToString()!,
             cidade: reader["cidade"].ToString()!,
             estado: reader["estado"].ToString()!,
@@ -35,10 +35,10 @@ public class LogradouroRepository : BaseRepository<Logradouro>, ILogradouroRepos
         {
             await using var connection = await GetOpenConnectionAsync();
             string query = _databaseType == DatabaseType.SqlServer
-            ? $"INSERT INTO {TableName} (cep, nome, bairro, cidade, estado, pais) "
+            ? $"INSERT INTO {TableName} (cep, rua, bairro, cidade, estado, pais) "
             + "OUTPUT INSERTED.id_logradouro "
             + "VALUES (@Cep, @Nome, @Bairro, @Cidade, @Estado, @Pais);"
-            : $"INSERT INTO {TableName} (cep, nome, bairro, cidade, estado, pais) "
+            : $"INSERT INTO {TableName} (cep, rua, bairro, cidade, estado, pais) "
             + "VALUES (@Cep, @Nome, @Bairro, @Cidade, @Estado, @Pais); "
             + "SELECT LAST_INSERT_ID();";
             await using var command = DbProvider.CreateCommand(query, connection);
@@ -83,7 +83,7 @@ public class LogradouroRepository : BaseRepository<Logradouro>, ILogradouroRepos
             await using var connection = await GetOpenConnectionAsync();
             string query = $"UPDATE {TableName} "
             + "SET cep = @Cep, "
-            + "nome = @Nome, "
+            + "rua = @Nome, "
             + "bairro = @Bairro, "
             + "cidade = @Cidade, "
             + "estado = @Estado, "

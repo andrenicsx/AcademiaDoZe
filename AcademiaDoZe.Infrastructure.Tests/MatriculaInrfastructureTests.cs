@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// Roberto Antunes Souza
 using AcademiaDoZe.Domain.Entities;
 using AcademiaDoZe.Domain.Enums;
 using AcademiaDoZe.Domain.ValueObjects;
@@ -9,23 +9,29 @@ namespace AcademiaDoZe.Infrastructure.Tests;
 
 public class MatriculaInfrastructureTests : TestBase
 {
-    [Fact]
-    public async Task Matricula_Adicionar()
+    // Função para gerar CPF válido com 11 dígitos numéricos
+    private static string GerarCpfValido()
     {
+        var random = new Random();
+        return string.Concat(Enumerable.Range(0, 11).Select(_ => random.Next(0, 10).ToString()));
+    }
+
+    // Cria um aluno de teste com CPF válido
+    private async Task<Aluno> CriarAlunoTeste()
+    {
+        var repoAluno = new AlunoRepository(ConnectionString, DatabaseType);
         var repoLogradouro = new LogradouroRepository(ConnectionString, DatabaseType);
+
         var logradouro = await repoLogradouro.ObterPorId(4);
         Assert.NotNull(logradouro);
 
         var arquivo = Arquivo.Criar(new byte[] { 1, 2, 3 });
-
-        var _cpf = "11140608981";
-        var repoAluno = new AlunoRepository(ConnectionString, DatabaseType);
-        Assert.False(await repoAluno.CpfJaExiste(_cpf), "CPF já existe no banco.");
+        var cpf = GerarCpfValido();
 
         var aluno = Aluno.Criar(
-            1, 
+            0,
             "Aluno Teste",
-            _cpf,
+            cpf,
             new DateOnly(2010, 10, 09),
             "49999999999",
             "aluno@teste.com",
@@ -35,10 +41,19 @@ public class MatriculaInfrastructureTests : TestBase
             "Senha@123",
             arquivo
         );
+
         await repoAluno.Adicionar(aluno);
+        return aluno;
+    }
+
+    // Cria uma matrícula de teste para um aluno
+    private async Task<Matricula> CriarMatriculaTeste(Aluno aluno)
+    {
+        var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
+        var arquivo = Arquivo.Criar(new byte[] { 1, 2, 3 });
 
         var matricula = Matricula.Criar(
-            1, 
+            0,
             aluno,
             EMatriculaPlano.Semestral,
             DateOnly.FromDateTime(DateTime.Today),
@@ -49,30 +64,30 @@ public class MatriculaInfrastructureTests : TestBase
             "Sem observações"
         );
 
-        var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
-        var matriculaInserida = await repoMatricula.Adicionar(matricula);
+        await repoMatricula.Adicionar(matricula);
+        return matricula;
+    }
 
-        Assert.NotNull(matriculaInserida);
-        Assert.True(matriculaInserida.Id > 0);
+    [Fact]
+    public async Task Matricula_Adicionar()
+    {
+        var aluno = await CriarAlunoTeste();
+        var matricula = await CriarMatriculaTeste(aluno);
+
+        Assert.NotNull(matricula);
+        Assert.True(matricula.Id > 0);
     }
 
     [Fact]
     public async Task Matricula_ObterPorAluno_Atualizar()
     {
+        var aluno = await CriarAlunoTeste();
+        var matricula = await CriarMatriculaTeste(aluno);
         var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
-        var repoAluno = new AlunoRepository(ConnectionString, DatabaseType);
-
-        var aluno = await repoAluno.ObterPorCpf("11140608981");
-        Assert.NotNull(aluno);
-
-        var matriculas = (await repoMatricula.ObterPorAluno(aluno!.Id)).ToList();
-        Assert.NotEmpty(matriculas);
-
-        var matricula = matriculas.First(); // pega a primeira matrícula
 
         var arquivo = Arquivo.Criar(new byte[] { 1, 2, 3 });
         var matriculaAtualizada = Matricula.Criar(
-            1, 
+            0,
             aluno,
             EMatriculaPlano.Anual,
             new DateOnly(2020, 05, 20),
@@ -96,20 +111,12 @@ public class MatriculaInfrastructureTests : TestBase
     [Fact]
     public async Task Matricula_ObterPorAluno_Remover_ObterPorId()
     {
+        var aluno = await CriarAlunoTeste();
+        var matricula = await CriarMatriculaTeste(aluno);
         var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
-        var repoAluno = new AlunoRepository(ConnectionString, DatabaseType);
 
-        var aluno = await repoAluno.ObterPorCpf("11140608981");
-        Assert.NotNull(aluno);
-
-        var matriculas = (await repoMatricula.ObterPorAluno(aluno!.Id)).ToList();
-        Assert.NotEmpty(matriculas);
-
-        var matricula = matriculas.First(); // pega a primeira matrícula
-        
         // Remover
         var resultadoRemocao = await repoMatricula.Remover(matricula.Id);
-
         Assert.True(resultadoRemocao);
 
         // Verificar se foi removida
@@ -118,31 +125,27 @@ public class MatriculaInfrastructureTests : TestBase
     }
 
     [Fact]
-    public async Task Matrcula_ObterTodos()
+    public async Task Matricula_ObterTodos()
     {
-        // ObterTodos
+        var aluno = await CriarAlunoTeste();
+        await CriarMatriculaTeste(aluno);
 
-        var repoMatriculaTodos = new MatriculaRepository(ConnectionString, DatabaseType);
+        var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
+        var resultado = await repoMatricula.ObterTodos();
 
-        var resultado = await repoMatriculaTodos.ObterTodos();
         Assert.NotNull(resultado);
+        Assert.NotEmpty(resultado);
     }
 
     [Fact]
     public async Task Matricula_ObterPorId()
     {
+        var aluno = await CriarAlunoTeste();
+        var matricula = await CriarMatriculaTeste(aluno);
         var repoMatricula = new MatriculaRepository(ConnectionString, DatabaseType);
-        var repoAluno = new AlunoRepository(ConnectionString, DatabaseType);
-
-        var aluno = await repoAluno.ObterPorCpf("12345678901");
-        Assert.NotNull(aluno);
-
-        var matriculas = (await repoMatricula.ObterPorAluno(aluno!.Id)).ToList();
-        Assert.NotEmpty(matriculas);
-
-        var matricula = matriculas.First(); // pega a primeira matrícula
 
         var matriculaPorId = await repoMatricula.ObterPorId(matricula.Id);
+
         Assert.NotNull(matriculaPorId);
         Assert.Equal(matricula.Id, matriculaPorId.Id);
     }

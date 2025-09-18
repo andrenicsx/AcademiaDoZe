@@ -1,5 +1,4 @@
-﻿//Roberto Antunes Souza
-using AcademiaDoZe.Domain.Entities;
+﻿using AcademiaDoZe.Domain.Entities;
 using AcademiaDoZe.Domain.ValueObjects;
 using AcademiaDoZe.Infrastructure.Repositories;
 

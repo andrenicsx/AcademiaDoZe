@@ -31,9 +31,9 @@ public class ColaboradorService : IColaboradorService
         // Cria a entidade de domínio a partir do DTO
         var colaborador = colaboradorDto.ToEntity();
         // Salva no repositório
-        await _repoFactory().Adicionar(colaborador);
+        var colaboradorComId = await _repoFactory().Adicionar(colaborador);
         // Retorna o DTO atualizado com o ID gerado
-        return colaborador.ToDto();
+        return colaboradorComId.ToDto();
 
     }
     public async Task<ColaboradorDTO> AtualizarAsync(ColaboradorDTO colaboradorDto)

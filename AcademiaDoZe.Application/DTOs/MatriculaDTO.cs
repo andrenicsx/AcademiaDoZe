@@ -1,5 +1,4 @@
-﻿//Roberto Antunes Souza
-using AcademiaDoZe.Application.Enums;
+﻿using AcademiaDoZe.Application.Enums;
 
 namespace AcademiaDoZe.Application.DTOs;
 

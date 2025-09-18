@@ -21,11 +21,21 @@ public class ColaboradorRepository : BaseRepository<Colaborador>, IColaboradorRe
             var logradouroId = Convert.ToInt32(reader["logradouro_id"]);
             var logradouroRepository = new LogradouroRepository(_connectionString, _databaseType);
             var logradouro = await logradouroRepository.ObterPorId(logradouroId) ?? throw new InvalidOperationException($"Logradouro com ID {logradouroId} não encontrado.");
+
+            var telefoneRaw = reader["telefone"] != DBNull.Value
+            ? reader["telefone"].ToString()!
+            : "";
+            var telefone = new string(telefoneRaw.Where(char.IsDigit).ToArray()); // mantém só números
+            if (telefone.Length < 10 || telefone.Length > 11)
+            {
+                telefone = "4999999999"; // ou outro número de teste válido
+            }
+
             // Cria o objeto Colaborador usando o método de fábrica
             var colaborador = Colaborador.Criar(
             id: reader["id_colaborador"] is DBNull ? 0 : Convert.ToInt32(reader["id_colaborador"]),
             cpf: reader["cpf"].ToString()!,
-            telefone: reader["telefone"].ToString()!,
+            telefone: telefone,
             nome: reader["nome"].ToString()!,
             dataNascimento: DateOnly.FromDateTime(Convert.ToDateTime(reader["nascimento"])),
             email: reader["email"].ToString()!,

@@ -29,11 +29,11 @@ public class ColaboradorInfrastructureTests : TestBase
         var cpfExistente = await repoColaboradorCpf.CpfJaExiste(_cpf);
         Assert.False(cpfExistente, "CPF já existe no banco de dados.");
         var colaborador = Colaborador.Criar(
-            1,
+            default,
         "zé",
         _cpf,
 
-        new DateOnly(2010, 10, 09),
+        new DateOnly(2000, 01, 01),
         "49999999999",
         "ze@com.br",
         logradouro!,

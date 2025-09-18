@@ -1,5 +1,4 @@
-﻿//Roberto Antunes Souza
-using AcademiaDoZe.Application.DTOs;
+﻿using AcademiaDoZe.Application.DTOs;
 using AcademiaDoZe.Application.Enums;
 using AcademiaDoZe.Application.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +8,7 @@ namespace AcademiaDoZe.Application.Tests;
 public class MatriculaApplicationTests
 {
     // Configurações de conexão (iguais às que você já usa)
-    const string connectionString = "Server=localhost;Database=db_academia_do_ze;User Id=root;Password=4457;";
+    const string connectionString = "Server=127.0.0.1;Port=3307;Database=db_academia_do_ze;Uid=root;Password=0811;";
     const EAppDatabaseType databaseType = EAppDatabaseType.MySql;
 
     [Fact(Timeout = 60000)]
