@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using AcademiaDoZe.Application.DTOs;
 using AcademiaDoZe.Application.Interfaces;
 using CommunityToolkit.Mvvm.Input;

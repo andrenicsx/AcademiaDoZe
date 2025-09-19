@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 namespace AcademiaDoZe.Infrastructure.Exceptions;
 
 // Classe base para exceções de infraestrutura

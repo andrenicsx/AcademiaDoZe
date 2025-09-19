@@ -1,4 +1,5 @@
-﻿using AcademiaDoZe.Application.Enums;
+﻿// André Nícolas Granemann Coelho
+using AcademiaDoZe.Application.Enums;
 
 namespace AcademiaDoZe.Application.DTOs;
 

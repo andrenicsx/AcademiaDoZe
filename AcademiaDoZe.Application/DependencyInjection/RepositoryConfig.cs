@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using AcademiaDoZe.Application.Enums;
 namespace AcademiaDoZe.Application.DependencyInjection;
 

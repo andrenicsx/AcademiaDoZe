@@ -1,4 +1,5 @@
-﻿using AcademiaDoZe.Application.DependencyInjection;
+﻿// André Nícolas Granemann Coelho
+using AcademiaDoZe.Application.DependencyInjection;
 using AcademiaDoZe.Application.Enums;
 namespace AcademiaDoZe.Presentation.AppMaui.Configuration
 {

@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using AcademiaDoZe.Infrastructure.Exceptions;
 using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;

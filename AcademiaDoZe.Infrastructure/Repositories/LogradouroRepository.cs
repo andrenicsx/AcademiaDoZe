@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using AcademiaDoZe.Domain.Entities;
 using AcademiaDoZe.Domain.Repositories;
 using AcademiaDoZe.Infrastructure.Data;

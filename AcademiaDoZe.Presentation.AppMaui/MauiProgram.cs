@@ -1,4 +1,5 @@
-﻿using AcademiaDoZe.Presentation.AppMaui.ViewModels;
+﻿// André Nícolas Granemann Coelho
+using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 using AcademiaDoZe.Presentation.AppMaui.Views;
 using Microsoft.Extensions.Logging;
 using AcademiaDoZe.Presentation.AppMaui.Configuration;

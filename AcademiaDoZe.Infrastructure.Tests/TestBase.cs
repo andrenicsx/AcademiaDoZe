@@ -1,4 +1,4 @@
-//Roberto Antunes Souza
+// André Nícolas Granemann Coelho
 using AcademiaDoZe.Infrastructure.Data;
 
 namespace AcademiaDoZe.Infrastructure.Tests;

@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using System.Text.RegularExpressions;
 
 namespace AcademiaDoZe.Domain.Services;

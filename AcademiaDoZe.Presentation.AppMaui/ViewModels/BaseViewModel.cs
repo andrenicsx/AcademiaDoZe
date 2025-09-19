@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AcademiaDoZe.Presentation.AppMaui.ViewModels

@@ -1,4 +1,4 @@
-﻿// Iago Henrique Schlemper
+﻿// André Nícolas Granemann Coelho
 namespace AcademiaDoZe.Application.Enums;
 
 public enum EAppDatabaseType

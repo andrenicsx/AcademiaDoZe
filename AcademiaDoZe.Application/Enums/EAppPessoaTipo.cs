@@ -1,4 +1,4 @@
-﻿// Iago Henrique Schlemper
+﻿// André Nícolas Granemann Coelho
 using System.ComponentModel.DataAnnotations;
 namespace AcademiaDoZe.Application.Enums;
 

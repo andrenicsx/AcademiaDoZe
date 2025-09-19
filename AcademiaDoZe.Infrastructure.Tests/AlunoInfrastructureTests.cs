@@ -1,4 +1,5 @@
-﻿using AcademiaDoZe.Domain.Entities;
+﻿// André Nícolas Granemann Coelho
+using AcademiaDoZe.Domain.Entities;
 using AcademiaDoZe.Domain.ValueObjects;
 using AcademiaDoZe.Infrastructure.Repositories;
 

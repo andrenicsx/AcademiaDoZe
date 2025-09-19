@@ -1,4 +1,4 @@
-﻿//Roberto Antunes Souza
+﻿// André Nícolas Granemann Coelho
 namespace AcademiaDoZe.Domain.Exceptions;
 
 // classe base para exceções de domínio

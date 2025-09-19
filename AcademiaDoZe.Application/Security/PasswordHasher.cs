@@ -1,4 +1,4 @@
-﻿// Iago Henrique Schlemper
+﻿// André Nícolas Granemann Coelho
 using Konscious.Security.Cryptography;
 using System.Security.Cryptography;
 using System.Text;
