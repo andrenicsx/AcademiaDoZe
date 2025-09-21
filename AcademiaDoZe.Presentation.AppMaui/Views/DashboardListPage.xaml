@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ======= Roberto Antunes Souza ======= -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.AppMaui.Views.DashboardListPage"
+             xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
+             x:DataType="vm:DashboardListViewModel"
+             Title="{Binding Title}">
+
+    <!-- ======= Recursos / Styles ======= -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!-- Estilo do Card (Border) -->
+            <Style x:Key="DashboardCardStyle" TargetType="Border">
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="18"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#40FFFFFF" Offset="0.0"/>
+                            <GradientStop Color="#10FFFFFF" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="16"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+
+            <!-- Estilos de Label locais (opcionais) -->
+            <Style x:Key="HeadlineLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="SubHeadlineLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="#d0d0d0"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- ======= Fundo gradiente ======= -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1e3c72" Offset="0.1"/>
+            <GradientStop Color="#2a5298" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*">
+
+            <!-- Header -->
+            <StackLayout Spacing="5" Margin="0,30,0,25" HorizontalOptions="Center">
+                <Border StrokeThickness="0"
+            Background="#00000000"
+            StrokeShape="Ellipse"
+            HeightRequest="140"
+            WidthRequest="140"
+            HorizontalOptions="Center">
+                    <Image HeightRequest="140" WidthRequest="140" Aspect="AspectFill">
+                        <Image.Source>
+                            <AppThemeBinding Light="academiadoze_claro.png"
+                                 Dark="academiadoze_escuro.png" />
+                        </Image.Source>
+                    </Image>
+                </Border>
+
+                <Label Text="Academia do Zé" Style="{StaticResource HeadlineLabelStyle}"/>
+                <Label Text="Sistema de Gerenciamento" Style="{StaticResource SubHeadlineLabelStyle}"/>
+            </StackLayout>
+
+            <!-- Cards Container -->
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="*,*"
+                  RowSpacing="20"
+                  ColumnSpacing="20"
+                  Padding="20">
+
+                <!-- Card Logradouros -->
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource DashboardCardStyle}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToLogradourosCommand}"/>
+                    </Border.GestureRecognizers>
+                    <StackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalLogradouros}" FontSize="20" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Logradouros" TextColor="#e0e0e0" FontSize="13" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Border>
+
+                <!-- Card Alunos -->
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource DashboardCardStyle}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToAlunosCommand}"/>
+                    </Border.GestureRecognizers>
+                    <StackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalAlunos}" FontSize="20" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Alunos" TextColor="#e0e0e0" FontSize="13" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Border>
+
+                <!-- Card Colaboradores -->
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource DashboardCardStyle}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToColaboradoresCommand}"/>
+                    </Border.GestureRecognizers>
+                    <StackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalColaboradores}" FontSize="20" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Colaboradores" TextColor="#e0e0e0" FontSize="13" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Border>
+
+                <!-- Card Matrículas -->
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource DashboardCardStyle}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToMatriculasCommand}"/>
+                    </Border.GestureRecognizers>
+                    <StackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalMatriculas}" FontSize="20" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Matrículas" TextColor="#e0e0e0" FontSize="13" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Border>
+
+            </Grid>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator Grid.Row="0" Grid.RowSpan="2"
+                               IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Color="White"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

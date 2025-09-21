@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ======= Roberto Antunes Souza ======= -->
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AcademiaDoZe.Presentation.AppMaui.Views.LogradouroPage"
+    xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
+    x:DataType="vm:LogradouroViewModel"
+    Title="{Binding Title}">
+
+	<!-- ======= Recursos / Styles ======= -->
+	<ContentPage.Resources>
+		<ResourceDictionary>
+
+			<!-- Estilo do Card (Border) -->
+			<Style x:Key="FormCardStyle" TargetType="Border">
+				<Setter Property="StrokeShape">
+					<Setter.Value>
+						<RoundRectangle CornerRadius="18"/>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="Background">
+					<Setter.Value>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+							<GradientStop Color="#40FFFFFF" Offset="0.0"/>
+							<GradientStop Color="#10FFFFFF" Offset="1.0"/>
+						</LinearGradientBrush>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="StrokeThickness" Value="0"/>
+				<Setter Property="Padding" Value="16"/>
+				<Setter Property="Margin" Value="15,10"/>
+			</Style>
+
+			<!-- Labels -->
+			<Style x:Key="LabelTitleStyle" TargetType="Label">
+				<Setter Property="FontSize" Value="14"/>
+				<Setter Property="TextColor" Value="White"/>
+				<Setter Property="FontAttributes" Value="Bold"/>
+			</Style>
+
+			<Style x:Key="SubHeadlineLabelStyle" TargetType="Label">
+				<Setter Property="FontSize" Value="14"/>
+				<Setter Property="TextColor" Value="#d0d0d0"/>
+			</Style>
+
+			<!-- Entry -->
+			<Style x:Key="EntryFormStyle" TargetType="Entry">
+				<Setter Property="BackgroundColor" Value="#1AFFFFFF"/>
+				<Setter Property="TextColor" Value="White"/>
+				<Setter Property="PlaceholderColor" Value="#80FFFFFF"/>
+				<Setter Property="HeightRequest" Value="40"/>
+				<Setter Property="Margin" Value="0,0,0,5"/>
+			</Style>
+
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<!-- ======= Fundo gradiente ======= -->
+	<ContentPage.Background>
+		<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+			<GradientStop Color="#1e3c72" Offset="0.1"/>
+			<GradientStop Color="#2a5298" Offset="1.0"/>
+		</LinearGradientBrush>
+	</ContentPage.Background>
+
+	<ScrollView>
+		<StackLayout Spacing="20" Padding="10">
+
+			<!-- CEP Section -->
+			<Border Style="{StaticResource FormCardStyle}">
+				<StackLayout Spacing="5">
+					<Label Text="CEP" Style="{StaticResource LabelTitleStyle}" />
+					<Grid ColumnDefinitions="*,Auto">
+						<Entry
+                            Grid.Column="0"
+                            Text="{Binding Logradouro.Cep}"
+                            Placeholder="00000-000"
+                            Keyboard="Numeric"
+                            Margin="0,0,10,0"
+                            Style="{StaticResource EntryFormStyle}" />
+						<Button
+                            Grid.Column="1"
+                            Text="Buscar CEP"
+                            Command="{Binding SearchByCepCommand}"
+                            Style="{StaticResource ButtonPrimary}"
+                            HeightRequest="40"
+                            Padding="15,0"/>
+					</Grid>
+				</StackLayout>
+			</Border>
+
+			<!-- Dados do Logradouro -->
+			<Border Style="{StaticResource FormCardStyle}">
+				<StackLayout Spacing="15">
+					<Label
+                        Text="{Binding Logradouro.Id, StringFormat='Logradouro ID: {0}'}"
+                        Style="{StaticResource SubHeadlineLabelStyle}"/>
+
+					<!-- Nome -->
+					<StackLayout Spacing="5">
+						<Label Text="Nome/Rua" Style="{StaticResource LabelTitleStyle}" />
+						<Entry
+                            Text="{Binding Logradouro.Nome}"
+                            Placeholder="Digite o nome da rua..."
+                            Style="{StaticResource EntryFormStyle}" />
+					</StackLayout>
+
+					<!-- Bairro -->
+					<StackLayout Spacing="5">
+						<Label Text="Bairro" Style="{StaticResource LabelTitleStyle}" />
+						<Entry
+                            Text="{Binding Logradouro.Bairro}"
+                            Placeholder="Digite o bairro..."
+                            Style="{StaticResource EntryFormStyle}" />
+					</StackLayout>
+
+					<!-- Cidade -->
+					<StackLayout Spacing="5">
+						<Label Text="Cidade" Style="{StaticResource LabelTitleStyle}" />
+						<Entry
+                            Text="{Binding Logradouro.Cidade}"
+                            Placeholder="Digite a cidade..."
+                            Style="{StaticResource EntryFormStyle}" />
+					</StackLayout>
+
+					<!-- Estado -->
+					<StackLayout Spacing="5">
+						<Label Text="Estado" Style="{StaticResource LabelTitleStyle}" />
+						<Entry
+                            Text="{Binding Logradouro.Estado}"
+                            Placeholder="Digite o estado..."
+                            Style="{StaticResource EntryFormStyle}" />
+					</StackLayout>
+
+					<!-- País -->
+					<StackLayout Spacing="5">
+						<Label Text="País" Style="{StaticResource LabelTitleStyle}" />
+						<Entry
+                            Text="{Binding Logradouro.Pais}"
+                            Placeholder="Digite o país..."
+                            Style="{StaticResource EntryFormStyle}" />
+					</StackLayout>
+				</StackLayout>
+			</Border>
+
+			<!-- Botões de Ação -->
+			<Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="15,10">
+				<Button
+                    Grid.Column="0"
+                    Text="Cancelar"
+                    Command="{Binding CancelCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    HeightRequest="50"/>
+				<Button
+                    Grid.Column="1"
+                    Text="Salvar"
+                    Command="{Binding SaveLogradouroCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    HeightRequest="50"/>
+			</Grid>
+
+			<!-- Loading Indicator -->
+			<ActivityIndicator
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Color="White"/>
+
+		</StackLayout>
+	</ScrollView>
+</ContentPage>
